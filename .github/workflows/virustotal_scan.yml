@@ -19,11 +19,15 @@ jobs:
 
     steps:
       - name: Set tag variable
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_RELEASE_TAG: ${{ github.event.inputs.release_tag }}
+          RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "TAG_NAME=${{ github.event.inputs.release_tag }}" >> $GITHUB_ENV
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "TAG_NAME=$INPUT_RELEASE_TAG" >> $GITHUB_ENV
           else
-            echo "TAG_NAME=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+            echo "TAG_NAME=$RELEASE_TAG_NAME" >> $GITHUB_ENV
           fi
 
       - name: Set report marker variable

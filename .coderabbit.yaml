@@ -28,7 +28,8 @@ reviews:
     base_branches:
       - "master"
       - "main"
-      - "perf/leanback-ui-and-playback-resilience"
+      - "custom"
+      - "dev"
 
   finishing_touches:
     autofix:
